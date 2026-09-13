@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <!-- URI mac dinh cua he thong file: tro toi NameNode cua HDFS -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
+
+  <!-- Thu muc lam viec tam cua Hadoop (dat ngoai HADOOP_HOME de khong mat khi nang cap) -->
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/home/thomm/hadoopdata/tmp</value>
+  </property>
+
+  <!-- Kich thuoc buffer doc/ghi tuan tu (byte) -->
+  <property>
+    <name>io.file.buffer.size</name>
+    <value>131072</value>
+  </property>
+
+  <!-- Cho phep user thomm mao danh (proxy) - can cho Spark History Server / HiveServer2 -->
+  <property>
+    <name>hadoop.proxyuser.thomm.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.thomm.groups</name>
+    <value>*</value>
+  </property>
+</configuration>

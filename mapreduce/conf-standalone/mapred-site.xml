@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Cấu hình Hadoop STANDALONE (local mode).
+  Không dùng YARN: Map và Reduce chạy trong cùng một JVM bằng LocalJobRunner.
+-->
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>local</value>
+  </property>
+</configuration>

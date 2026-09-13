@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Cấu hình Hadoop STANDALONE (local mode).
+  Không dùng HDFS: mọi đường dẫn là file trên hệ thống file cục bộ.
+-->
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>file:///</value>
+  </property>
+</configuration>

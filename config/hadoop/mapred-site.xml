@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <!-- Chay MapReduce tren YARN thay vi che do local -->
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+
+  <!-- Bo sung HADOOP_MAPRED_HOME cho ApplicationMaster va cac task -->
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
+    <value>HADOOP_MAPRED_HOME=/home/thomm/opt/hadoop</value>
+  </property>
+  <property>
+    <name>mapreduce.map.env</name>
+    <value>HADOOP_MAPRED_HOME=/home/thomm/opt/hadoop</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=/home/thomm/opt/hadoop</value>
+  </property>
+
+  <!-- Classpath cac thu vien MapReduce khi chay tren container YARN -->
+  <property>
+    <name>mapreduce.application.classpath</name>
+    <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+  </property>
+
+  <!-- Tai nguyen cap cho ApplicationMaster va cac task map/reduce -->
+  <property>
+    <name>yarn.app.mapreduce.am.resource.mb</name>
+    <value>1536</value>
+  </property>
+  <property>
+    <name>mapreduce.map.memory.mb</name>
+    <value>1024</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.memory.mb</name>
+    <value>2048</value>
+  </property>
+  <property>
+    <name>mapreduce.map.java.opts</name>
+    <value>-Xmx820m</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.java.opts</name>
+    <value>-Xmx1638m</value>
+  </property>
+
+  <!-- MapReduce JobHistory Server -->
+  <property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>localhost:10020</value>
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>localhost:19888</value>
+  </property>
+</configuration>
