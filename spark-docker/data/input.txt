@@ -1,0 +1,4 @@
+Apache Spark la cong cu xu ly du lieu lon trong bo nho.
+Spark chay tren Docker voi mot master, mot worker va mot History Server.
+Hadoop va Spark deu la cong cu xu ly du lieu lon.
+Spark nhanh hon MapReduce vi giu du lieu trong bo nho.

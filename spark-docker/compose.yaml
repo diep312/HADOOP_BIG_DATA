@@ -1,0 +1,46 @@
+name: spark
+
+# Cum Spark 3.5.9 Standalone: 1 master + 1 worker + History Server.
+# Moi service chay voi user root: user mac dinh cua image (uid 185) khong chmod duoc
+# thu muc bind-mount tu o C:, ma Spark can chmod khi ghi ket qua.
+# Cac cong chi mo tren 127.0.0.1 vi Spark master khong co xac thuc.
+x-spark: &spark
+  image: spark:3.5.9-python3
+  user: root
+  environment:
+    SPARK_DAEMON_MEMORY: 512m
+  volumes:
+    - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf:ro
+    - ./apps:/opt/spark/apps
+    - ./data:/opt/spark/data
+    - spark-events:/opt/spark/spark-events
+
+services:
+  spark-master:
+    <<: *spark
+    container_name: spark-master
+    hostname: spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --host spark-master --port 7077 --webui-port 8080
+    ports:
+      - "127.0.0.1:8080:8080"   # Web UI master
+      - "127.0.0.1:7077:7077"   # RPC master
+      - "127.0.0.1:4040:4040"   # Web UI cua ung dung dang chay (driver nam trong container nay)
+
+  spark-worker:
+    <<: *spark
+    hostname: spark-worker
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --cores 4 --memory 1536m --webui-port 8081
+    ports:
+      - "127.0.0.1:8081:8081"   # Web UI worker
+    depends_on:
+      - spark-master
+
+  spark-history:
+    <<: *spark
+    container_name: spark-history
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.history.HistoryServer
+    ports:
+      - "127.0.0.1:18080:18080" # Web UI History Server (trung cong voi History Server cua cum WSL)
+
+volumes:
+  spark-events:
